@@ -1,5 +1,21 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+class Bogie {
+    String name;
+    int capacity;
+
+    public Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (Capacity: " + capacity + ")";
+    }
+}
 
 public class Main {
 
@@ -7,20 +23,27 @@ public class Main {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create LinkedHashSet to maintain insertion order with uniqueness
-        Set<String> trainFormation = new LinkedHashSet<>();
+        // Create list of bogies
+        List<Bogie> bogies = new ArrayList<>();
 
-        // Attach bogies
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
+        // Add bogies with capacities
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 48));
+        bogies.add(new Bogie("First Class", 24));
 
-        // Attempt to add a duplicate bogie
-        trainFormation.add("Sleeper");
+        System.out.println("Before Sorting:");
+        for (Bogie b : bogies) {
+            System.out.println(b);
+        }
 
-        // Display final formation (insertion order preserved, duplicates ignored)
-        System.out.println("Final train formation:");
-        System.out.println(trainFormation);
+        // Sort bogies by capacity using Comparator
+        bogies.sort(Comparator.comparingInt(b -> b.capacity));
+
+        System.out.println("\nAfter Sorting by Capacity:");
+        for (Bogie b : bogies) {
+            System.out.println(b);
+        }
+
+        System.out.println("\nProgram continues...");
     }
 }
